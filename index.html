@@ -576,6 +576,19 @@
             document.getElementById('cookie-banner').style.display = 'block';
         }
     })();
+
+    // Visitor counter
+    (function() {
+        var el = document.getElementById('counter');
+        fetch('https://api.counterapi.dev/v1/picodebello.nl/visits/up')
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (data && data.count) {
+                    el.textContent = data.count.toLocaleString('nl-NL');
+                }
+            })
+            .catch(function() { /* keep fallback number */ });
+    })();
 </script>
 
 </body>
