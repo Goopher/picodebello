@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pico de Bello — Wijfiksen jouw code</title>
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --accent: #e94560;
+            --accent2: #0f3460;
+            --light: #f5f5f7;
+            --text: #1d1d1f;
+            --muted: #6e6e73;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: #fff;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav a.cta-nav {
+            background: var(--accent);
+            color: #fff;
+            padding: 0.5rem 1.5rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: transform 0.2s;
+        }
+
+        nav a.cta-nav:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            background: linear-gradient(180deg, #f8f9ff 0%, #fff 100%);
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: #fee;
+            color: var(--accent);
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            max-width: 800px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 .highlight {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--muted);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            padding: 0.9rem 2.2rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(233,69,96,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(233,69,96,0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            padding: 0.9rem 2.2rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border: 2px solid #ddd;
+            transition: border-color 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+        }
+
+        /* Code window */
+        .code-window {
+            margin-top: 3rem;
+            background: var(--primary);
+            border-radius: 12px;
+            padding: 0;
+            max-width: 700px;
+            width: 100%;
+            text-align: left;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .code-titlebar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .code-dot.red { background: #ff5f56; }
+        .code-dot.yellow { background: #ffbd2e; }
+        .code-dot.green { background: #27ca40; }
+
+        .code-content {
+            padding: 1.5rem;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #a2a8d3;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .code-content .comment { color: #5c6370; }
+        .code-content .keyword { color: #c678dd; }
+        .code-content .function { color: #61afef; }
+        .code-content .string { color: #98c379; }
+        .code-content .error { color: #e06c75; }
+
+        /* Services */
+        .services {
+            padding: 6rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            text-align: center;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--light);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: transform 0.2s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        /* Process */
+        .process {
+            padding: 6rem 2rem;
+            background: var(--light);
+        }
+
+        .process-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .step h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .step p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 6rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .price-card {
+            border: 2px solid #eee;
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .price-card.featured {
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px rgba(233,69,96,0.15);
+        }
+
+        .price-card.featured::before {
+            content: 'POPULAIR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #fff;
+            padding: 0.2rem 1rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .price-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-card .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 1rem 0;
+        }
+
+        .price-card .price span {
+            font-size: 1rem;
+            color: var(--muted);
+            font-weight: 400;
+        }
+
+        .price-card ul {
+            list-style: none;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .price-card li {
+            padding: 0.4rem 0;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .price-card li::before {
+            content: '\2713';
+            color: var(--accent);
+            font-weight: 700;
+            margin-right: 0.5rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 2rem;
+            background: var(--light);
+        }
+
+        .testimonials-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .testimonial-card .stars {
+            color: #f5a623;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-card blockquote {
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .testimonial-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent2);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-role {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        /* CTA */
+        .final-cta {
+            padding: 6rem 2rem;
+            text-align: center;
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .final-cta p {
+            color: #a2a8d3;
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--muted);
+            border-top: 1px solid #eee;
+        }
+
+        footer a {
+            color: var(--muted);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .section-title { font-size: 1.8rem; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .step { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" class="logo">pico<span>de</span>bello</a>
+    <a href="#contact" class="cta-nav">Bel ons</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="badge">Nieuw: Nu ook AI-slachtoffers welkom</div>
+    <h1>Jouw code is een <span class="highlight">puinhoop.</span><br>Wijfiksen da.</h1>
+    <p>Heb je lekker zitten vibe-coden met AI en is 't een zooi geworre? Geen paniek jansen. De jongens van Pico de Bello ruimen 't op.</p>
+    <div class="cta-group">
+        <a href="#contact" class="btn-primary">Stuur je code op</a>
+        <a href="#diensten" class="btn-secondary">Bekijk de diensten</a>
+    </div>
+
+    <div class="code-window">
+        <div class="code-titlebar">
+            <div class="code-dot red"></div>
+            <div class="code-dot yellow"></div>
+            <div class="code-dot green"></div>
+        </div>
+        <div class="code-content">
+<span class="comment">// TODO: dit werkte gister nog wel</span>
+<span class="keyword">function</span> <span class="function">processData</span>(data) {
+    <span class="keyword">let</span> result = data.<span class="function">map</span>(x => x.thing?.stuff?.items);
+    <span class="comment">// chatgpt zei dat dit moest</span>
+    result = result.<span class="function">flat</span>().<span class="function">flat</span>().<span class="function">flat</span>().<span class="function">flat</span>();
+    <span class="keyword">try</span> { <span class="keyword">return</span> JSON.<span class="function">parse</span>(JSON.<span class="function">stringify</span>(result)); }
+    <span class="keyword">catch</span>(e) { <span class="keyword">return</span> <span class="string">"werkt nie"</span>; } <span class="comment">// <span class="error">fixme</span></span>
+}
+        </div>
+    </div>
+</section>
+
+<!-- Diensten -->
+<section class="services" id="diensten">
+    <div class="section-label">Diensten</div>
+    <h2 class="section-title">Wa wij allemoal kunne</h2>
+
+    <div class="services-grid">
+        <div class="service-card">
+            <div class="service-icon">&#128269;</div>
+            <h3>Code Sloop-inspectie</h3>
+            <p>Wij kijken hoe erg 't is. Eerlijk is eerlijk, 't is altijd erger dan je denkt. Onze jongens scrollen door je repo en leggen haarfijn uit waar 't mis is gegaan.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">&#128295;</div>
+            <h3>Vibe Code Opruiming</h3>
+            <p>Je hebt drie weken met Claude of ChatGPT zitten kletsen en nou werkt niks meer. Wij halen de rommel eruit en zorgen dat 't weer draait. Meestal.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">&#129529;</div>
+            <h3>Prompt Detox</h3>
+            <p>Je hele codebase is eigenlijk een aaneenschakeling van gekopieerde AI-antwoorden. Wij ontwarren da en maken er echte code van. Met comments en alles.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">&#128679;</div>
+            <h3>Noodgevallen</h3>
+            <p>Productie is down, de database is weg, en je hebt geen backups want "dat zou de AI nog doen." Wij staan klaar. Belt u na het weekend maar naar dit nummer.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">&#128200;</div>
+            <h3>Technische Schuld Taxatie</h3>
+            <p>Hoeveel is jouw technische schuld eigenlijk waard? Wij berekenen 't tot op de cent. Spoiler: 't is meer dan je huis.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-icon">&#127891;</div>
+            <h3>Vibe Code Preventie</h3>
+            <p>Wij leren jouw team hoe ze NIET moeten coden met AI. Want voorkomen is beter dan genezen. Al verdienen wij daar eigenlijk niks aan.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Process -->
+<section class="process">
+    <div class="process-inner">
+        <div class="section-label">Werkwijze</div>
+        <h2 class="section-title">Hoe werkt da dan</h2>
+
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div>
+                    <h3>Stuur je code op</h3>
+                    <p>Mail ons je repo, je zip-bestand, of desnoods screenshots van je ChatGPT-gesprek. Wij oordelen nie. Nou ja, een beetje wel.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div>
+                    <h3>Wij kijken d'r na</h3>
+                    <p>Onze senior slopers bekijken de schade. Je krijgt een eerlijk rapport. Met kleurtjes en zo, net als bij de energielabel van je huis.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div>
+                    <h3>Plan van aanpak</h3>
+                    <p>Wij maken een plan. Soms is da "opnieuw beginne", maar da zeggen wij op een nette manier. Met een offerte en alles.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div>
+                    <h3>Wij gansen aan de slag</h3>
+                    <p>De jongens gansen los op je code. Met de hand hoor, geen AI. Nou ja, een heel klein beetje AI. Maar dan de goeie.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing" id="prijzen">
+    <div class="section-label">Tarieven</div>
+    <h2 class="section-title">Wa kost da dan</h2>
+
+    <div class="pricing-grid">
+        <div class="price-card">
+            <h3>Klusje</h3>
+            <div class="price">&euro;499 <span>/ eenmalig</span></div>
+            <ul>
+                <li>1 repo tot 10.000 regels</li>
+                <li>Code review rapport</li>
+                <li>Lijst met "dit moet echt anders"</li>
+                <li>Troostgesprek (15 min)</li>
+            </ul>
+            <a href="#contact" class="btn-secondary">Aanvragen</a>
+        </div>
+
+        <div class="price-card featured">
+            <h3>Verbouwing</h3>
+            <div class="price">&euro;2.499 <span>/ project</span></div>
+            <ul>
+                <li>Volledige code opruiming</li>
+                <li>Tot 50.000 regels</li>
+                <li>Refactoring & tests toevoegen</li>
+                <li>2 weken nazorg</li>
+                <li>Onbeperkt troostgesprekken</li>
+            </ul>
+            <a href="#contact" class="btn-primary">Aanvragen</a>
+        </div>
+
+        <div class="price-card">
+            <h3>Totale Sloop</h3>
+            <div class="price">&euro;??? <span>/ overleg</span></div>
+            <ul>
+                <li>Voor de echt erge gevallen</li>
+                <li>Microservices die nie micro zijn</li>
+                <li>7 databases voor 1 tabel</li>
+                <li>Dedicated sloopteam</li>
+                <li>Psychologische begeleiding</li>
+            </ul>
+            <a href="#contact" class="btn-secondary">Bel ons gewoon</a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+    <div class="testimonials-inner">
+        <div class="section-label">Ervaringen</div>
+        <h2 class="section-title">Wa klansen zegge</h2>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <blockquote>"Ik had met Claude een hele webshop gebouwd in een weekend. Werkte prima. Totdat ik 'm online zette. De jongens van Pico de Bello hadden 't in twee weken weer toonbaar."</blockquote>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">RB</div>
+                    <div>
+                        <div class="testimonial-name">Ansen de V.</div>
+                        <div class="testimonial-role">Ondernansen, Rotterdam-Zuid</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <blockquote>"Mijn CTO was weg en de hele backend was geschreven door een stagiair met ChatGPT. 47 try-catch blokken in een functie. Pico de Bello heeft 't opgelost. Ik huil nog steeds, maar van blijdschap."</blockquote>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">SK</div>
+                    <div>
+                        <div class="testimonial-name">Sandra K.</div>
+                        <div class="testimonial-role">CEO, startup (naam liever nie noeme)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+                <blockquote>"Ze zeiden dat 't een weekje zou duren. 't Werden d'r drie. Maar goed, ik had ook niet verteld dat de helft in PHP4 stond en de andere helft in Python 2. Verder top."</blockquote>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">JP</div>
+                    <div>
+                        <div class="testimonial-name">Jan-Piansen</div>
+                        <div class="testimonial-role">Freelance "full-stack developer"</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta" id="contact">
+    <h2>Nie lansen lansen.</h2>
+    <p>Hoe lansen je wacht, hoe erger 't wordt. Die technische schuld betaalt zichzelf nie af hoor.</p>
+    <a href="mailto:info@picodebello.nl" class="btn-primary">Mail ons: info@picodebello.nl</a>
+</section>
+
+<footer>
+    <p>&copy; 2026 Pico de Bello B.V. &mdash; KvK Rotterdam &mdash; <a href="#">Algemansen Voorwaarden</a></p>
+    <p style="margin-top: 0.5rem; font-size: 0.75rem; color: #bbb;">Gevestigd op Rotterdam-Zuid. Wij komme ook na de overkant, maar dan rekene wij toeslag.</p>
+</footer>
+
+</body>
+</html>
