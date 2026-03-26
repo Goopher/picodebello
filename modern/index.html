@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Picodebello — Wijfiksen jouw code</title>
+    <meta name="description" content="Pi Code Bello is gespecialiseerd in code audits, refactoring en het professionaliseren van AI-gegenereerde codebases.">
+    <title>Pi Code Bello — Code Quality & Refactoring Experts</title>
     <style>
         :root {
             --primary: #1a1a2e;
@@ -51,6 +52,7 @@
 
         .logo span {
             color: var(--accent);
+            margin: 0 0.15em;
         }
 
         nav a.cta-nav {
@@ -78,6 +80,18 @@
             text-align: center;
             padding: 6rem 2rem 4rem;
             background: linear-gradient(180deg, #f8f9ff 0%, #fff 100%);
+        }
+
+        .brand-header {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .brand-header span {
+            color: var(--accent);
         }
 
         .hero .badge {
@@ -328,7 +342,7 @@
         }
 
         .price-card.featured::before {
-            content: 'POPULAIR';
+            content: 'AANBEVOLEN';
             position: absolute;
             top: -12px;
             left: 50%;
@@ -490,18 +504,19 @@
 <body>
 
 <nav>
-    <a href="#" class="logo">pico<span>de</span>bello</a>
-    <a href="#contact" class="cta-nav">Bel ons</a>
+    <a href="#" class="logo">pi<span>code</span>bello</a>
+    <a href="#contact" class="cta-nav">Contact</a>
 </nav>
 
 <!-- Hero -->
 <section class="hero">
-    <div class="badge">Nieuw: Nu ook AI-slachtoffers welkom</div>
-    <h1>Jouw code is een <span class="highlight">puinhoop.</span><br>Wijfiksen da.</h1>
-    <p>Heb je lekker zitten vibe-coden met AI en is 't een zooi geworre? Geen paniek jansen. De jongens van Picodebello ruimen 't op.</p>
+    <div class="brand-header">pi <span>code</span> bello</div>
+    <div class="badge">Gespecialiseerd in AI-gegenereerde codebases</div>
+    <h1>Jouw code verdient <span class="highlight">beter.</span><br>Wij leveren dat.</h1>
+    <p>AI-tools genereren code in recordtempo, maar kwaliteit, onderhoudbaarheid en beveiliging blijven achter. Pi Code Bello brengt uw codebase op professioneel niveau.</p>
     <div class="cta-group">
-        <a href="#contact" class="btn-primary">Stuur je code op</a>
-        <a href="#diensten" class="btn-secondary">Bekijk de diensten</a>
+        <a href="#contact" class="btn-primary">Vrijblijvende analyse</a>
+        <a href="#diensten" class="btn-secondary">Onze diensten</a>
     </div>
 
     <div class="code-window">
@@ -517,7 +532,7 @@
     <span class="comment">// chatgpt zei dat dit moest</span>
     result = result.<span class="function">flat</span>().<span class="function">flat</span>().<span class="function">flat</span>().<span class="function">flat</span>();
     <span class="keyword">try</span> { <span class="keyword">return</span> JSON.<span class="function">parse</span>(JSON.<span class="function">stringify</span>(result)); }
-    <span class="keyword">catch</span>(e) { <span class="keyword">return</span> <span class="string">"werkt nie"</span>; } <span class="comment">// <span class="error">fixme</span></span>
+    <span class="keyword">catch</span>(e) { <span class="keyword">return</span> <span class="string">"error"</span>; } <span class="comment">// <span class="error">fixme</span></span>
 }
         </div>
     </div>
@@ -526,38 +541,38 @@
 <!-- Diensten -->
 <section class="services" id="diensten">
     <div class="section-label">Diensten</div>
-    <h2 class="section-title">Wa wij allemoal kunne</h2>
+    <h2 class="section-title">Wat wij voor u kunnen betekenen</h2>
 
     <div class="services-grid">
         <div class="service-card">
             <div class="service-icon">&#128269;</div>
-            <h3>Code Sloop-inspectie</h3>
-            <p>Wij kijken hoe erg 't is. Eerlijk is eerlijk, 't is altijd erger dan je denkt. Onze jongens scrollen door je repo en leggen haarfijn uit waar 't mis is gegaan.</p>
+            <h3>Code Audit</h3>
+            <p>Een grondige analyse van uw codebase op architectuur, veiligheid, performance en onderhoudbaarheid. U ontvangt een helder rapport met concrete verbeterpunten.</p>
         </div>
         <div class="service-card">
             <div class="service-icon">&#128295;</div>
-            <h3>Vibe Code Opruiming</h3>
-            <p>Je hebt drie weken met Claude of ChatGPT zitten kletsen en nou werkt niks meer. Wij halen de rommel eruit en zorgen dat 't weer draait. Meestal.</p>
+            <h3>AI-code Refactoring</h3>
+            <p>AI-gegenereerde code bevat vaak duplicatie, inconsistente patronen en ontbrekende foutafhandeling. Wij refactoren dit naar productiewaardige kwaliteit.</p>
         </div>
         <div class="service-card">
             <div class="service-icon">&#129529;</div>
-            <h3>Prompt Detox</h3>
-            <p>Je hele codebase is eigenlijk een aaneenschakeling van gekopieerde AI-antwoorden. Wij ontwarren da en maken er echte code van. Met comments en alles.</p>
+            <h3>Architectuur Herstel</h3>
+            <p>Wanneer snelle iteraties hebben geleid tot een ondoorzichtige codebase, brengen wij structuur aan. Duidelijke lagen, heldere interfaces en gedocumenteerde beslissingen.</p>
         </div>
         <div class="service-card">
             <div class="service-icon">&#128679;</div>
-            <h3>Noodgevallen</h3>
-            <p>Productie is down, de database is weg, en je hebt geen backups want "dat zou de AI nog doen." Wij staan klaar. Belt u na het weekend maar naar dit nummer.</p>
+            <h3>Incident Response</h3>
+            <p>Productieverstoringen vereisen snelle actie. Ons team is beschikbaar voor spoedinterventies: diagnose, herstel en preventieve maatregelen.</p>
         </div>
         <div class="service-card">
             <div class="service-icon">&#128200;</div>
-            <h3>Technische Schuld Taxatie</h3>
-            <p>Hoeveel is jouw technische schuld eigenlijk waard? Wij berekenen 't tot op de cent. Spoiler: 't is meer dan je huis.</p>
+            <h3>Technische Schuld Analyse</h3>
+            <p>Wij brengen uw technische schuld in kaart en kwantificeren de impact op doorlooptijd, stabiliteit en ontwikkelkosten. Inclusief een geprioriteerd verbeterplan.</p>
         </div>
         <div class="service-card">
             <div class="service-icon">&#127891;</div>
-            <h3>Vibe Code Preventie</h3>
-            <p>Wij leren jouw team hoe ze NIET moeten coden met AI. Want voorkomen is beter dan genezen. Al verdienen wij daar eigenlijk niks aan.</p>
+            <h3>AI-code Best Practices Training</h3>
+            <p>Leer uw team effectief en verantwoord werken met AI-codeertools. Richt zich op code review, prompt engineering en kwaliteitsborging.</p>
         </div>
     </div>
 </section>
@@ -566,35 +581,35 @@
 <section class="process">
     <div class="process-inner">
         <div class="section-label">Werkwijze</div>
-        <h2 class="section-title">Hoe werkt da dan</h2>
+        <h2 class="section-title">Ons proces</h2>
 
         <div class="process-steps">
             <div class="step">
                 <div class="step-number">1</div>
                 <div>
-                    <h3>Stuur je code op</h3>
-                    <p>Mail ons je repo, je zip-bestand, of desnoods screenshots van je ChatGPT-gesprek. Wij oordelen nie. Nou ja, een beetje wel.</p>
+                    <h3>Intake</h3>
+                    <p>U deelt uw repository of codebase met ons. Wij behandelen uw code vertrouwelijk en tekenen desgewenst een NDA vooraf.</p>
                 </div>
             </div>
             <div class="step">
                 <div class="step-number">2</div>
                 <div>
-                    <h3>Wij kijken d'r na</h3>
-                    <p>Onze senior slopers bekijken de schade. Je krijgt een eerlijk rapport. Met kleurtjes en zo, net als bij de energielabel van je huis.</p>
+                    <h3>Analyse</h3>
+                    <p>Onze senior engineers voeren een diepgaande analyse uit. U ontvangt een overzichtelijk rapport met bevindingen, risico's en aanbevelingen.</p>
                 </div>
             </div>
             <div class="step">
                 <div class="step-number">3</div>
                 <div>
-                    <h3>Plan van aanpak</h3>
-                    <p>Wij maken een plan. Soms is da "opnieuw beginne", maar da zeggen wij op een nette manier. Met een offerte en alles.</p>
+                    <h3>Voorstel</h3>
+                    <p>Op basis van de analyse stellen wij een plan van aanpak op met een heldere scope, tijdlijn en vaste prijs. Geen verrassingen achteraf.</p>
                 </div>
             </div>
             <div class="step">
                 <div class="step-number">4</div>
                 <div>
-                    <h3>Wij gansen aan de slag</h3>
-                    <p>De jongens gansen los op je code. Met de hand hoor, geen AI. Nou ja, een heel klein beetje AI. Maar dan de goeie.</p>
+                    <h3>Uitvoering</h3>
+                    <p>Ons team voert de verbeteringen door, inclusief code reviews, tests en documentatie. U wordt gedurende het traject op de hoogte gehouden.</p>
                 </div>
             </div>
         </div>
@@ -603,46 +618,46 @@
 
 <!-- Pricing -->
 <section class="pricing" id="prijzen">
-    <div class="section-label">Tarieven</div>
-    <h2 class="section-title">Wa kost da dan</h2>
+    <div class="section-label">Pakketten</div>
+    <h2 class="section-title">Kies het pakket dat bij u past</h2>
 
     <div class="pricing-grid">
         <div class="price-card">
-            <h3>Klusje</h3>
-            <div class="price">&euro;499 <span>/ eenmalig</span></div>
+            <h3>Code Audit</h3>
+            <div class="price" style="font-size:1.4rem; color:var(--muted);">Eenmalig</div>
             <ul>
-                <li>1 repo tot 10.000 regels</li>
-                <li>Code review rapport</li>
-                <li>Lijst met "dit moet echt anders"</li>
-                <li>Troostgesprek (15 min)</li>
+                <li>1 repository tot 10.000 regels</li>
+                <li>Uitgebreid analyserapport</li>
+                <li>Geprioriteerde aanbevelingen</li>
+                <li>30 minuten toelichting</li>
             </ul>
-            <a href="#contact" class="btn-secondary">Aanvragen</a>
+            <a href="#contact" class="btn-secondary">Offerte aanvragen</a>
         </div>
 
         <div class="price-card featured">
-            <h3>Verbouwing</h3>
-            <div class="price">&euro;2.499 <span>/ project</span></div>
+            <h3>Refactoring</h3>
+            <div class="price" style="font-size:1.4rem; color:var(--muted);">Per project</div>
             <ul>
-                <li>Volledige code opruiming</li>
+                <li>Volledige code-optimalisatie</li>
                 <li>Tot 50.000 regels</li>
-                <li>Refactoring & tests toevoegen</li>
-                <li>2 weken nazorg</li>
-                <li>Onbeperkt troostgesprekken</li>
+                <li>Refactoring, tests en documentatie</li>
+                <li>2 weken ondersteuning na oplevering</li>
+                <li>Tussentijdse voortgangsrapportages</li>
             </ul>
-            <a href="#contact" class="btn-primary">Aanvragen</a>
+            <a href="#contact" class="btn-primary">Offerte aanvragen</a>
         </div>
 
         <div class="price-card">
-            <h3>Totale Sloop</h3>
-            <div class="price">&euro;??? <span>/ overleg</span></div>
+            <h3>Enterprise</h3>
+            <div class="price" style="font-size:1.4rem; color:var(--muted);">Op maat</div>
             <ul>
-                <li>Voor de echt erge gevallen</li>
-                <li>Microservices die nie micro zijn</li>
-                <li>7 databases voor 1 tabel</li>
-                <li>Dedicated sloopteam</li>
-                <li>Psychologische begeleiding</li>
+                <li>Complexe multi-repo projecten</li>
+                <li>Microservices-architectuur</li>
+                <li>Dedicated team op locatie</li>
+                <li>Doorlopende ondersteuning</li>
+                <li>SLA met gegarandeerde responstijd</li>
             </ul>
-            <a href="#contact" class="btn-secondary">Bel ons gewoon</a>
+            <a href="#contact" class="btn-secondary">Neem contact op</a>
         </div>
     </div>
 </section>
@@ -650,42 +665,42 @@
 <!-- Testimonials -->
 <section class="testimonials">
     <div class="testimonials-inner">
-        <div class="section-label">Ervaringen</div>
-        <h2 class="section-title">Wa klansen zegge</h2>
+        <div class="section-label">Referenties</div>
+        <h2 class="section-title">Wat onze klanten zeggen</h2>
 
         <div class="testimonials-grid">
             <div class="testimonial-card">
                 <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <blockquote>"Ik had met Claude een hele webshop gebouwd in een weekend. Werkte prima. Totdat ik 'm online zette. De jongens van Picodebello hadden 't in twee weken weer toonbaar."</blockquote>
+                <blockquote>"Ons MVP was volledig met AI-tools gebouwd. Functioneel werkte het, maar het was onmogelijk om uit te breiden. Pi Code Bello heeft de architectuur hersteld en we konden weer door."</blockquote>
                 <div class="testimonial-author">
-                    <div class="testimonial-avatar">RB</div>
+                    <div class="testimonial-avatar">AV</div>
                     <div>
-                        <div class="testimonial-name">Ansen de V.</div>
-                        <div class="testimonial-role">Ondernansen, Rotterdam-Zuid</div>
+                        <div class="testimonial-name">A. de Vries</div>
+                        <div class="testimonial-role">Founder, SaaS-startup</div>
                     </div>
                 </div>
             </div>
 
             <div class="testimonial-card">
                 <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <blockquote>"Mijn CTO was weg en de hele backend was geschreven door een stagiair met ChatGPT. 47 try-catch blokken in een functie. Picodebello heeft 't opgelost. Ik huil nog steeds, maar van blijdschap."</blockquote>
+                <blockquote>"Na het vertrek van onze lead developer zat er niemand meer die de codebase begreep. Pi Code Bello heeft alles gedocumenteerd, gerefactored en ons team weer zelfredzaam gemaakt."</blockquote>
                 <div class="testimonial-author">
                     <div class="testimonial-avatar">SK</div>
                     <div>
-                        <div class="testimonial-name">Sandra K.</div>
-                        <div class="testimonial-role">CEO, startup (naam liever nie noeme)</div>
+                        <div class="testimonial-name">S. Kemper</div>
+                        <div class="testimonial-role">CEO, tech-startup</div>
                     </div>
                 </div>
             </div>
 
             <div class="testimonial-card">
-                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
-                <blockquote>"Ze zeiden dat 't een weekje zou duren. 't Werden d'r drie. Maar goed, ik had ook niet verteld dat de helft in PHP4 stond en de andere helft in Python 2. Verder top."</blockquote>
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <blockquote>"De audit van Pi Code Bello legde structurele problemen bloot die we zelf over het hoofd hadden gezien. Het verbetertraject heeft onze deployment-frequentie verdubbeld."</blockquote>
                 <div class="testimonial-author">
                     <div class="testimonial-avatar">JP</div>
                     <div>
-                        <div class="testimonial-name">Jan-Piansen</div>
-                        <div class="testimonial-role">Freelance "full-stack developer"</div>
+                        <div class="testimonial-name">J. Pietersen</div>
+                        <div class="testimonial-role">CTO, scale-up</div>
                     </div>
                 </div>
             </div>
@@ -695,14 +710,13 @@
 
 <!-- Final CTA -->
 <section class="final-cta" id="contact">
-    <h2>Nie lansen lansen.</h2>
-    <p>Hoe lansen je wacht, hoe erger 't wordt. Die technische schuld betaalt zichzelf nie af hoor.</p>
-    <a href="mailto:info@picodebello.nl" class="btn-primary">Mail ons: info@picodebello.nl</a>
+    <h2>Klaar om uw codebase te verbeteren?</h2>
+    <p>Technische schuld lost zichzelf niet op. Neem vandaag nog contact op voor een vrijblijvend gesprek.</p>
+    <a href="mailto:info@picodebello.nl" class="btn-primary">info@picodebello.nl</a>
 </section>
 
 <footer>
-    <p>&copy; 2026 Picodebello B.V. &mdash; KvK Rotterdam &mdash; <a href="#">Algemansen Voorwaarden</a></p>
-    <p style="margin-top: 0.5rem; font-size: 0.75rem; color: #bbb;">Gevestigd op Rotterdam-Zuid. Wij komme ook na de overkant, maar dan rekene wij toeslag.</p>
+    <p>&copy; 2026 Pi Code Bello B.V. &mdash; <a href="#">Algemene Voorwaarden</a></p>
 </footer>
 
 </body>
