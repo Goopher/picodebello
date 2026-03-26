@@ -27,6 +27,7 @@
         gtag('js', new Date());
         gtag('config', 'G-LMKKHCLQZT');
     </script>
+    <script>if (localStorage.getItem('picodebello-version') === 'modern') { window.location.href = '/'; }</script>
     <style>
         body {
             font-family: 'Comic Sans MS', 'Comic Sans', 'Chalkboard SE', 'Comic Neue', sans-serif;
@@ -360,6 +361,7 @@
         <h1>~* PI<span>CODE</span>BELLO *~</h1>
         <div class="subtitle">B.V. - Uw vibe code opgeruimd sinds 2025</div>
         <div class="stars">* * * * *</div>
+        <a href="/" id="version-toggle" style="color: #ffcc00; font-size: 0.85rem; font-family: 'Comic Sans MS', sans-serif;">[ Bekijk de moderne versie ]</a>
     </header>
 
     <div class="counter-bar">
@@ -589,6 +591,14 @@
             })
             .catch(function() { /* keep fallback number */ });
     })();
+</script>
+
+<script>
+    document.getElementById('version-toggle').addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.setItem('picodebello-version', 'modern');
+        window.location.href = '/';
+    });
 </script>
 
 </body>
